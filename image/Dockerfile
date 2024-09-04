@@ -1,3 +1,5 @@
+FROM ubuntu:23.10
+
 ARG RELEASE
 ARG LAUNCHPAD_BUILD_ARCH
 LABEL org.opencontainers.image.ref.name=ubuntu
@@ -12,4 +14,3 @@ RUN useradd -m -d /home/container container
 USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
-CMD         [ "/bin/bash", "/entrypoint.sh" ]
