@@ -38,6 +38,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get current date
+        id: date
+        uses: Kaven-Universe/github-action-current-date-time@v1
+        with:
+          format: "YYYY_MM_DD"
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
@@ -45,4 +51,4 @@ jobs:
           platforms: linux/amd64, linux/arm64
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/catsz/archean_pterodactyl:$(date +%s)
+          tags: ghcr.io/catsz/archean_pterodactyl:${{ steps.date.outputs.time }}
