@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - ./
+      - ./image
 
 permissions:
   actions: read
@@ -47,8 +47,8 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: ./
+          context: ./image
           platforms: linux/amd64, linux/arm64
-          file: ./Dockerfile
+          file: ./image/Dockerfile
           push: true
           tags: ghcr.io/catsz/archean_pterodactyl:${{ steps.date.outputs.time }}
