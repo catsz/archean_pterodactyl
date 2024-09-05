@@ -5,4 +5,4 @@ RUN apt-get update && apt-get install -y 	git 	openssl 	libpng16-16 	libharfbuzz
 USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
-cmd ["/bin/bash"]
+CMD ["/bin/bash"]
