@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
                         git \
                         openssl \    
                         libpng16-16 \
-                        libharfbuzz-bin 
+                        libharfbuzz-bin \
+                        iproute2
 RUN apt clean 
 RUN rm -rf /var/lib/apt/list/*
 RUN useradd -m -d /home/container container
