@@ -1,23 +1,21 @@
-#!/bin/bash
-cd /home/container || exit 1
-
-# Configure colors
-CYAN='\033[0;36m'
-RESET_COLOR='\033[0m'
+!/bin/bash
 
 # Default the TZ environment variable to UTC.
 TZ=${TZ:-UTC}
-export TZ
-
-# Set environment variable that holds the Internal Docker IP
+	@@ -8,16 +13,11 @@ export TZ
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
-# Replace Startup Variables
-# shellcheck disable=SC2086
-MODIFIED_STARTUP=$(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
-echo -e "${CYAN}STARTUP /home/container: ${MODIFIED_STARTUP} ${RESET_COLOR}"
+# Switch to the container's working directory
+cd /home/container || exit 1
 
-# Run the Server
+# Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
+# variable format of "${VARIABLE}" before evaluating the string and automatically
+# replacing the values.
+PARSED=$(echo "$STARTUP" | sed -e 's/{{/${/g' -e 's/}}/}/g')
+
+# Display the command we're running in the output, and then execute it with eval
+printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m"
+echo "$PARSED"
 # shellcheck disable=SC2086
-eval ${MODIFIED_STARTUP}
+eval "$PARSED"
