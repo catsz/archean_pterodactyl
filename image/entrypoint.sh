@@ -2,7 +2,7 @@
 
 # Default the TZ environment variable to UTC.
 TZ=${TZ:-UTC}
-	@@ -8,16 +13,11 @@ export TZ
+export TZ
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
